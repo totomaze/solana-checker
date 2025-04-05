@@ -173,6 +173,11 @@ float get_solana_price()
         return 0;
 
     json js_response = json::parse(response);
+
+    if(js_response.contains("status") && js_response["status"].contains("error_code")) {
+        return 0;
+    }
+    
     float price = (float)js_response["solana"]["usd"];
     return price;
 }
